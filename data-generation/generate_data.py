@@ -32,7 +32,7 @@ def generate_data(rows=10000, output_file='random_data.csv'):
     # Write to CSV
     with open(output_file, 'w', newline='') as csvfile:
         fieldnames = ['id', 'price', 'volume', 'date']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
         writer.writerows(data)
