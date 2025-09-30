@@ -1,13 +1,14 @@
 import uuid
 import random
 import os
+import csv
 from datetime import datetime, timedelta
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
-def generate_data(rows=10000, output_file='internal_data.csv', sample_size=1000):
+def generate_data(rows=10000, output_file='data-generation/internal_data.csv', sample_size=1000):
     """
     Generate a CSV file with randomized data and create two sample files.
     
@@ -81,7 +82,7 @@ def generate_data(rows=10000, output_file='internal_data.csv', sample_size=1000)
         # Create and modify first sample (broker_1_data.csv)
         sample_1_data = random.sample(data, sample_size)
         modified_sample_1 = modify_sample(sample_1_data)
-        with open('broker_1_data.csv', 'w', newline='') as f:
+        with open('data-generation/broker_1_data.csv', 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=data[0].keys())
             writer.writeheader()
             writer.writerows(modified_sample_1)
@@ -140,7 +141,7 @@ def generate_data(rows=10000, output_file='internal_data.csv', sample_size=1000)
             doc.build(elements)
         
         # Create PDF for broker 2 data
-        create_pdf(modified_sample_2, 'broker_2_data.pdf')
+        create_pdf(modified_sample_2, 'data-generation/broker_2_data.pdf')
         
         print(f"Successfully created sample files:")
         print(f"- broker_1_data.csv (CSV)")
